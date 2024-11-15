@@ -3,14 +3,17 @@ import sqlite3
 
 app = Flask(__name__)
 
-# Головна сторінка
 @app.route("/")
 def index():
     return render_template("index.html")
 
-# Сторінка з меню
 @app.get("/menu/")
 def menu():
+    pizzas = [
+        {"name": "Маргаріта", "ingredients": "Томатний соус, моцарела, помідори, базилік", "price": 200},
+        {"name": "Гавайська", "ingredients": "Консервований ананас, ніжне куряче філе, сири моцарела та пармезан", "price": 240},
+        {"name": "4 сира", "ingredients": "Вершковий соус, сир: моцарела, чеддер, твердий, блакитний сир", "price": 220}
+    ]
     conn = sqlite3.connect('menu.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM menu_items")
@@ -18,7 +21,6 @@ def menu():
     conn.close()
     return render_template("menu.html", pizzas=pizzas)
 
-# Сторінка для адміністратора
 @app.route("/admin/", methods=["GET", "POST"])
 def admin():
     if request.method == "POST":
@@ -26,7 +28,6 @@ def admin():
         description = request.form["description"]
         price = float(request.form["price"])
 
-        # Додавання страви в базу даних
         conn = sqlite3.connect('menu.db')
         cursor = conn.cursor()
         cursor.execute("INSERT INTO menu_items (name, description, price) VALUES (?, ?, ?)", (name, description, price))

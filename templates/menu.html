@@ -19,9 +19,9 @@
             {% for pizza in pizzas %}
             <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ pizza[1] }}</td>
-                <td>{{ pizza[2] }}</td>
-                <td>{{ pizza[3] }} грн</td>
+                <td>{{ pizza.name }}</td>
+                <td>{{ pizza.ingredients }}</td>
+                <td>{{ pizza.price }}</td>
             </tr>
             {% endfor %}
         </tbody>

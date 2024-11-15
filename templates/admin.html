@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Додавання нової піци
+{% endblock title %}
+
+{% block center %}
+    <h1>Додати нову піцу</h1>
+    <form method="post" action="{{ url_for('admin') }}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Назва піци</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Опис/Інгредієнти</label>
+            <textarea class="form-control" id="description" name="description" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Ціна</label>
+            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Додати піцу</button>
+    </form>
+{% endblock center %}
